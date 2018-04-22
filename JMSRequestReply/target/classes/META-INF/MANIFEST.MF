@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1524437269453
+Build-Jdk: 1.8.0_45
+Built-By: Hugo
+Bundle-Description: Empty Camel Spring Example
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.html
+Bundle-ManifestVersion: 2
+Bundle-Name: Empty Camel Spring Example [JMSRequestReply]
+Bundle-SymbolicName: JMSRequestReply
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: com.testes;uses:="org.apache.camel.builder";version="1.0
+ .0"
+Import-Package: javax.jms,org.apache.activemq,org.apache.camel;version="
+ [2.18,3)",org.apache.camel.builder;version="[2.18,3)",org.apache.camel.
+ component.sjms;version="[2.18,3)",org.apache.camel.model;version="[2.18
+ ,3)",org.springframework.jms.core
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-3.2.0.201605172007
