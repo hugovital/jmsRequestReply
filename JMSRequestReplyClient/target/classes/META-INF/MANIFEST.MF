@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1524437228252
+Bnd-LastModified: 1524445171385
 Build-Jdk: 1.8.0_45
 Built-By: Hugo
 Bundle-Description: Empty Camel Spring Example

@@ -1,6 +1,5 @@
 package com.testes;
 
-import java.util.Arrays;
 import java.util.Random;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -27,10 +26,15 @@ public class JMSRoute extends RouteBuilder {
 			.split(body().tokenize(","))			
 			.wireTap("direct:toFila");
 
+		Random r = new Random();
+		int n = r.nextInt(999);
+		
+		n = 775;
+		
 		from("direct:toFila")
 			.setProperty("guardado", simple("${body}"))
 			//.to("jms:mySincQueue?exchangePattern=InOut&requestTimeout=2000000")
-			.to("sjms:mySincQueue?exchangePattern=InOut&responseTimeOut=2000000")//&namedReplyTo=returnQueue")
+			.to("sjms:mySincQueue?exchangePattern=InOut&responseTimeOut=2000000&namedReplyTo=returnQueue_" + n)
 			.log("Recebido da Junção: ${exchangeProperty.guardado} - ${body}");
 		
 		/**
