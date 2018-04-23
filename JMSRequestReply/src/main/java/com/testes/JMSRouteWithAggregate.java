@@ -1,5 +1,7 @@
 package com.testes;
 
+import java.util.Random;
+
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.sjms.SjmsComponent;
@@ -22,18 +24,23 @@ public class JMSRouteWithAggregate extends RouteBuilder {
 			.split(body().tokenize(","))			
 			.wireTap("direct:toFila");
 		
-		int n = 775; //simula fila única por processo / máquina
+		
+		Random r = new Random();
+		int n = r.nextInt(999);
+		
+		String filaRetorno = "returnQueue_" + n;
 
 		from("direct:toFila")
 			.setProperty("guardado", simple("${body}"))
 			//.setHeader("JMSReplyTo", constant("returnQueue_775"))
-			.setHeader("fila_para_retorno", constant("returnQueue_775"))
+			.setHeader("fila_para_retorno", constant( filaRetorno ))
 			.to("sjms:mySincQueue?exchangePattern=InOnly")
 			.to("direct:aggregate");
 		
 		//----retorno
 
-		from("jms:returnQueue_775")
+		//from("jms:returnQueue_775")
+		from("jms:" + filaRetorno)
 			.log("removido da fila: ${body}")
 			.process( ex -> {
 				

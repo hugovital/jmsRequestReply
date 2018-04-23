@@ -17,7 +17,7 @@ public class JMSRouteClient extends RouteBuilder {
 		from("direct:errors")
 			.log("...dentro de erros....");
 		
-		from("jms:mySincQueue?concurrentConsumers=5")
+		from("jms:mySincQueue?concurrentConsumers=50")
 		.log("Retirando da Fila: ${body}")
 		.process( ex -> {		
 			System.out.println(Arrays.toString(ex.getIn().getHeaders().entrySet().toArray()));
